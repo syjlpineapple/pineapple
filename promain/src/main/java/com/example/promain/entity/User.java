@@ -1,22 +1,59 @@
 package com.example.promain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import java.io.Serializable;
 
 /**
- * @ClassName: User
- * @Description: 用户类
- * @Author: zhilee
- * @Date: 2021/6/22 3:10 PM
- **/
+ * <p>
+ * 
+ * </p>
+ *
+ * @author zhilee
+ * @since 2021-06-26
+ */
+public class User implements Serializable {
 
-@Data
-@AllArgsConstructor
-public class User {
+    private static final long serialVersionUID = 1L;
 
-    private Integer id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+
+    private String password;
 
     private String username;
 
-    private String password;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+        "id=" + id +
+        ", password=" + password +
+        ", username=" + username +
+        "}";
+    }
 }

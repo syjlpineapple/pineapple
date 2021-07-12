@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -42,5 +43,19 @@ public class JWTUtil {
             builder.setExpiration(new Date(expireMillis));
         }
         return builder.compact();
+    }
+
+    public static String createToken(String username, List<String> roles) {
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("roles",roles);
+        Date now = new Date();
+        Date validity = new Date(now.getTime() + 600000);
+        return Jwts.builder()
+                .setClaims(map)
+                .setIssuedAt(now)
+                .setExpiration(validity)
+                .setSubject(username)
+                .signWith(SignatureAlgorithm.HS256, "zhilee")
+                .compact();
     }
 }
